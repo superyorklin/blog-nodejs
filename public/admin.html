@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>上传文件</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./javascripts/jquery.min.js"></script>
+    </head>
+    <body>
+        <h1>博客md文件上传</h1>
+        <form  name="form1" action="/admin" method="post" enctype="multipart/form-data">
+            文章标题<input type="text" name="title"/><br>
+            文章类别<input type="text" name="type"/><br>
+            写作时间<input type="text" name="time"/><br>
+            选择文件<input type="file" name="file"/><br>
+            <input type="submit" value="确认上传" />
+        </form>
+    </body>
+    <script>
+        var reg = /^\s*$/;
+        var mdreg = /\.md$/;
+        var button = $('button');
+       
+        $('form').on('submit',function(e){
+            var file=document.form1.file.value;
+            if(reg.test($('input[name="title"]').val()) || reg.test($('input[name="type"]').val()) || reg.test($('input[name="time"]').val())){
+                e.preventDefault();
+            }else if(!mdreg.test(file)){
+                e.preventDefault();
+            }
+        })
+    </script>
+</html>
