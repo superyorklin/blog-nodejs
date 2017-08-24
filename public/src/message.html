@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Finance Assistance</title>
+    <link rel="stylesheet" href="./lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <script src="./lib/jquery-3.2.1.min.js"></script>
+    <script src="./lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script src="js/MessageDataList.js"></script>
+    <script src="js/common/Cookie.js"></script>
+    <script src="js/common/Request.js"></script>
+</head>
+<body>
+<div>
+    <div>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#" onclick="testPost()">Finance Assistance</a>
+                </div>
+
+                <div>
+                    <ul class="nav navbar-nav">
+                        <li id="nav_btn_home" class="active">
+                            <a href="#">Message</a>
+                        </li>
+
+                        <li id="nav_btn_stock">
+                            <a href="#">Stock</a>
+                        </li>
+
+                        <li id="nav_btn_fund">
+                            <a href="#">Fund</a>
+                        </li>
+
+                        <li id="nav_btn_user" class="dropdown">
+
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                User
+                                <b class="caret"></b>
+                            </a>
+
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Self Information</a></li>
+                                <li><a href="#">User Management</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">Logout</a></li>
+                            </ul>
+
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </nav>
+    </div>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div>
+                <ul class="nav navbar-nav">
+                    <li id="nav_btn_newsMessage" class="dropdown">
+
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            news
+                            <b class="caret"></b>
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li><a href="#">history</a></li>
+                            <li><a href="#">latest</a></li>
+                        </ul>
+
+                    </li>
+
+                    <li id="nav_btn_stockMessage" class="dropdown">
+
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            stock
+                            <b class="caret"></b>
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li><a href="#">history</a></li>
+                            <li><a href="#">latest</a></li>
+                        </ul>
+
+                    </li>
+
+                    <li id="nav_btn_fundMessage" class="dropdown">
+
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            fund
+                            <b class="caret"></b>
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li><a href="#">history</a></li>
+                            <li><a href="#">latest</a></li>
+                        </ul>
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div id="messageList">
+    </div>
+
+    <div>
+        <ul id="messageListPagination" class="pagination">
+        </ul>
+    </div>
+</div>
+</body>
+</html>

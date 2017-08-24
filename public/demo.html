@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>demo</title>
+</head>
+<body>
+<script type="text/javascript">
+	let date = new Date();
+	date = date.getTime();
+	document.cookie = "name=linyz";
+	document.cookie = "time="+date;
+	fetch('http://localhost:3000/demo',{
+            method: "POST",
+            credentials: "include"      
+        }).then(res => res.json()).then(data => console.log(data));
+</script>
+</body>
+</html>
