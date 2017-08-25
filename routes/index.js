@@ -1,6 +1,7 @@
 var multipart = require('connect-multiparty');
 var multipartMiddleware = multipart();  
 var fs = require('fs');
+var path = require('path');
 
 module.exports = function(app){
   app.get('/',function(req,res){
@@ -19,14 +20,14 @@ module.exports = function(app){
   app.post('/admin',multipartMiddleware,function(req,res){
     //console.log(req.body);
     //console.log(req.files);
-    var regbody = /<body[^>]*>([\s\S]*)<\/body>/;
+    var regbody = /<body[^>]*>([\s\S]*?)<\/body>/;
     var tmp_path = req.files.file.path;
     var fileContnet = fs.readFileSync(tmp_path,'utf-8');
     var result = regbody.exec(fileContnet);
     if(!result){
       res.send("something wrong")
     }else{
-      console.log(result[1]);
+      fs.writeFileSync(path.join(__dirname,'../public/demo.html'),result[1]);
       res.send("done");
     }
   });
@@ -112,7 +113,7 @@ module.exports = function(app){
     articals.data = temp;
     res.send(articals);
   })
-    /*
+  /*
   * 获取归档信息
   *
   * */
@@ -157,4 +158,32 @@ module.exports = function(app){
     ];
     res.send(archive);
   })
+  /*
+  * 获取推荐信息
+  *
+  * */
+  app.get('/recommend',function (req,res) {
+
+  })
+
+  app.get('/artical/:id',function (req,res){
+    if(req.params.id === 'one'){
+      var contnet = fs.readFileSync(path.join(__dirname,'../public/demo.html'),'utf-8');
+      res.send(contnet);
+    }
+  })
+
+  app.get('/comment',function (req,res){
+    if(req.query.articalId === 'one'){
+      var comment = [
+        {
+          time: '2017-5-5',
+          content: '写的不错',
+          name: 'york'
+        }
+      ]
+      res.send(comment);
+    }
+  })
+  
 }
