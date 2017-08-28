@@ -3,6 +3,19 @@ var multipartMiddleware = multipart();
 var fs = require('fs');
 var path = require('path');
 
+var comment = [
+  {
+    time: '2017-5-5',
+    content: '写的不错',
+    name: 'york'
+  },
+  {
+    time: '2017-8-28',
+    content: '这是一篇好文章',
+    name: 'linge'
+  }
+];
+
 module.exports = function(app){
   app.get('/',function(req,res){
     res.render('index', { title: 'Express' });
@@ -174,16 +187,20 @@ module.exports = function(app){
   })
 
   app.get('/comment',function (req,res){
-    if(req.query.articalId === 'one'){
-      var comment = [
-        {
-          time: '2017-5-5',
-          content: '写的不错',
-          name: 'york'
-        }
-      ]
+    if(req.query.articalId === 'one'){    
       res.send(comment);
     }
+  })
+
+  app.post('/comment',function(req,res){
+    comment.push({
+      time: '2017-8-29',
+      name: req.query.name,
+      content: req.query.content
+    })
+    res.send({
+      status: "ok"
+    });
   })
   
 }
