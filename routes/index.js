@@ -2,6 +2,7 @@ var multipart = require('connect-multiparty');
 var multipartMiddleware = multipart();  
 var fs = require('fs');
 var path = require('path');
+var Artical = require('../model/Artical');
 
 var comment = [
   {
@@ -31,6 +32,25 @@ module.exports = function(app){
   * 文章数据保存入数据库
   **/
   app.post('/admin',multipartMiddleware,function(req,res){
+    var artical = new Artical({
+      articalId: 'asdfghjkl',
+      title: 'demo',
+      time: new Date().getTime(),
+      desc: 'ahh',
+      tag: ['react'],
+      visit: 0,
+      comment: 0
+    });
+    artical.save(function (err, res) {
+      
+              if (err) {
+                  console.log("Error:" + err);
+              }
+              else {
+                  console.log("Res:" + res);
+              }
+      
+          });
     //console.log(req.body);
     //console.log(req.files);
     var regbody = /<body[^>]*>([\s\S]*?)<\/body>/;

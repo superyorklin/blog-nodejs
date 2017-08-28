@@ -7,10 +7,10 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var fs = require('fs');
 var routes = require('./routes/index');
+var mongoose = require('mongoose');
 
 var app = express();
 
-var app = express();
 //设置跨域访问
 app.all('*', function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -64,4 +64,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+mongoose.connect('mongodb://localhost/blog',{
+  useMongoClient: true
+});
 module.exports = app;
