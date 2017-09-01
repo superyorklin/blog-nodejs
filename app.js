@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 var fs = require('fs');
 var routes = require('./routes/index');
 var mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
 
 var app = express();
 

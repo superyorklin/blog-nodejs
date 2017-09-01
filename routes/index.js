@@ -2,67 +2,85 @@ var multipart = require('connect-multiparty');
 var multipartMiddleware = multipart();  
 var fs = require('fs');
 var path = require('path');
+var uuid = require('uuid/v4');
 var Artical = require('../model/Artical');
-
-var comment = [
-  {
-    time: '2017-5-5',
-    content: '写的不错',
-    name: 'york'
-  },
-  {
-    time: '2017-8-28',
-    content: '这是一篇好文章',
-    name: 'linge'
-  }
-];
+var Comment = require('../model/Comment');
+var Recommend = require('../model/Recommend');
+var co = require('co');
+var _ = require('lodash');
 
 module.exports = function(app){
   app.get('/',function(req,res){
     res.render('index', { title: 'Express' });
   });
 
-  app.post('/demo',function(req,res){
-    res.setHeader("Access-Control-Allow-Credentials","true");
-    res.send(req.cookies);
+  app.post('/login',function(req,res){
+    var userName = req.query.userName;
+    var password = req.query.password;
+    if(userName=='admin'&&password=='admin'){
+      res.cookie('lyz_blog','admin',{maxAge: 3600000});
+      res.send({login: true})
+    }else{
+      res.send({login: false})
+    }
   })
-
+  app.post('/upload',multipartMiddleware,function(req,res){
+    var tmp_path = req.files.logo.path;
+    var regbody = /<body[^>]*>([\s\S]*?)<\/body>/;
+    var fileContnet = fs.readFileSync(tmp_path,'utf-8');
+    fs.unlink(tmp_path);
+    var result =regbody.exec(fileContnet)
+    if(!result){
+      res.send({err: "something wrong"})
+    }else{
+      fs.writeFileSync(path.join(__dirname,'../public/content.html'),result[1]);
+      res.send({success: "done"});
+    }
+  })
   /*
   * 管理员访问，上传md文件转换而成的html
   * 文章数据保存入数据库
   **/
-  app.post('/admin',multipartMiddleware,function(req,res){
+  app.post('/admin',function(req,res){
+    var content = fs.readFileSync(path.join(__dirname,'../public/content.html'),'utf-8');
+    fs.unlink(path.join(__dirname,'../public/content.html'));
     var artical = new Artical({
-      articalId: 'asdfghjkl',
-      title: 'demo',
+      articalId: uuid(),
+      title: req.query.articalTitle,
       time: new Date().getTime(),
-      desc: 'ahh',
-      tag: ['react'],
+      desc: req.query.articalDesc,
+      tag: req.query.articalType.split(" "),
       visit: 0,
-      comment: 0
+      comment: 0,
+      content: content
     });
-    artical.save(function (err, res) {
-      
-              if (err) {
-                  console.log("Error:" + err);
-              }
-              else {
-                  console.log("Res:" + res);
-              }
-      
-          });
-    //console.log(req.body);
-    //console.log(req.files);
-    var regbody = /<body[^>]*>([\s\S]*?)<\/body>/;
-    var tmp_path = req.files.file.path;
-    var fileContnet = fs.readFileSync(tmp_path,'utf-8');
-    var result = regbody.exec(fileContnet);
-    if(!result){
-      res.send("something wrong")
-    }else{
-      fs.writeFileSync(path.join(__dirname,'../public/demo.html'),result[1]);
-      res.send("done");
-    }
+    artical.save(function(err,data){
+      if(err){
+        res.status(403).end();
+      }else{
+        res.send({Success: true})
+      }
+    })
+  });
+  /*
+  * 管理员访问，添加推荐文章
+  * 文章数据保存入数据库
+  **/
+  app.post('/recommend',function(req,res){
+    var recommend = new Recommend({
+      author: req.query.articalAuthor,
+      title: req.query.articalTitle,
+      url: req.query.articalUrl,
+      tag: req.query.articalType.split(" "),
+      desc: req.query.articalDesc
+    });
+    recommend.save(function(err,data){
+      if(err){
+        res.status(403).end()
+      }else{
+        res.send({Success: true})
+      }
+    })
   });
 
   /*
@@ -70,157 +88,124 @@ module.exports = function(app){
   *
   * */
   app.get('/allArtical',function (req,res) {
-    var page = + req.query.page;
-    console.log(page)
-    var articals = {
-      total: 11,
-      data: [{
-            id: "one",
-            title: "react-router学习--york",
-            time: "2017-5-20",
-            desc: "<img src='http://yeoman.io/static/illustration-home-inverted.91b07808be.png' />",
-            tag: ["react","javascript"],
-            visit: 50
-        },{
-            id: "two",
-            title: "TCP协议简介",
-            time: "2017-5-21",
-            desc: "<p>这是一个描述</p>",
-            visit: 50
-        },{
-            id: "three",
-            title: "rxjs学习笔记",
-            time: "2017-5-22",
-            desc: "<p>这是一个描述</p>",
-            visit: 50
-        },{
-            id: "four",
-            title: "markdown",
-            time: "2017-5-23",
-            desc: "<p>这是一个描述</p>",
-            visit: 50
-        },{
-            id: "five",
-            title: "Server-Sent Events 教程",
-            time: "2017-5-25",
-            desc: "<p>这是一个描述</p>",
-            visit: 50
-        },{
-            id: "six",
-            title: "express总结",
-            time: "2017-5-29",
-            desc: "<p>这是一个6描述</p>",
-            visit: 50
-        },{
-          id: "six",
-          title: "express总结",
-          time: "2017-5-29",
-          desc: "<p>这是一个7描述</p>",
-          visit: 50
-        },{
-          id: "six",
-          title: "express总结",
-          time: "2017-5-29",
-          desc: "<p>这是一个8描述</p>",
-          visit: 50
-        },{
-          id: "six",
-          title: "express总结",
-          time: "2017-5-29",
-          desc: "<p>这是一个9描述</p>",
-          visit: 50
-        },{
-          id: "six",
-          title: "express总结",
-          time: "2017-5-29",
-          desc: "<p>这是一个10描述</p>",
-          visit: 50
-        },{
-          id: "six",
-          title: "express总结",
-          time: "2017-5-29",
-          desc: "<p>这是一个11描述</p>",
-          visit: 50
-        }]};
-    var temp = articals.data.slice((page-1)*10,page*10); 
-    articals.data = temp;
-    res.send(articals);
+    var page = + req.query.page-1;
+    co(function*(){
+      var count = yield Artical.count({}).exec();
+      var articals = yield Artical.find({}).skip(page*10).limit(10);
+      var response = {};
+      response.data = [];
+      response.total = count;
+      articals.forEach(function(artical) {
+        response.data.push(_.omit(artical,'content'))
+      });
+      res.send(response);
+    })
+    
   })
   /*
   * 获取归档信息
   *
   * */
   app.get('/archive',function (req,res) {
-    var archive = [
-      {
-        type: "2017年5月",
-        data: [
-          {
-            id: "three",
-            title: "rxjs学习笔记",
-            time: "2017-5-22",
-            desc: "<p>这是一个描述</p>",
-            visit: 50
-          },{
-            id: "six",
-            title: "express总结",
-            time: "2017-5-29",
-            desc: "<p>这是一个11描述</p>",
-            visit: 50
-          }
-        ]
-      },
-      {
-        type: "2017年6月",
-        data: [
-          {
-            id: "three",
-            title: "rxjs学习笔记",
-            time: "2017-6-22",
-            desc: "<p>这是一个描述</p>",
-            visit: 50
-          },{
-            id: "six",
-            title: "express总结",
-            time: "2017-6-29",
-            desc: "<p>这是一个11描述</p>",
-            visit: 50
-          }
-        ]
-      }
-    ];
-    res.send(archive);
+
+    co(function*(){
+      var articals = yield Artical.find({}).sort('time');
+      let archive = [];
+      let typeArr = [];
+      articals.forEach(function(artical){
+        let time = new Date(artical.time);
+        let date = time.getFullYear().toString() +'年'+ (time.getMonth()+1).toString() + '月';
+        if(_.indexOf(typeArr,date) == -1){
+          typeArr.push(date);
+          archive.push({
+            type: date,
+            data: [
+              {
+                id: artical.articalId,
+                title: artical.title,
+                time: artical.time,
+                desc: artical.desc,
+                visit: artical.visit,
+                tag: artical.tag
+              }
+            ]
+          })
+        }else{
+          let index = _.indexOf(typeArr,date);
+          archive[index].data.push({
+            id: artical.articalId,
+            title: artical.title,
+            time: artical.time,
+            desc: artical.desc,
+            visit: artical.visit,
+            tag: artical.tag
+          })
+        }
+      })
+      res.send(archive);
+    })
   })
   /*
   * 获取推荐信息
   *
   * */
   app.get('/recommend',function (req,res) {
-
+    var page = + req.query.page-1;
+    co(function*(){
+      var count = yield Recommend.count({}).exec();
+      var articals = yield Recommend.find({}).skip(page*10).limit(10);
+      var response = {};
+      response.data = [];
+      response.total = count;
+      articals.forEach(function(artical) {
+        response.data.push(artical)
+      });
+      res.send(response);
+    })
   })
 
   app.get('/artical/:id',function (req,res){
-    if(req.params.id === 'one'){
-      var contnet = fs.readFileSync(path.join(__dirname,'../public/demo.html'),'utf-8');
-      res.send(contnet);
-    }
+    var articalId = req.params.id;
+    co(function*(){
+      yield Artical.where({articalId: articalId}).update({$inc: {visit: 1}});
+      var artical = yield Artical.find({articalId: articalId});
+      if(artical){
+        res.send(artical[0].content);
+      }else{
+        res.status(403).end();
+      }
+    })
   })
 
   app.get('/comment',function (req,res){
-    if(req.query.articalId === 'one'){    
-      res.send(comment);
-    }
+    var articalId = req.query.articalId;
+    co(function*(){
+      var comment = yield Comment.find({articalId: articalId})
+      if(comment){
+        res.send(comment);
+      }else{
+        res.status(403).end();
+      }
+    })
   })
 
   app.post('/comment',function(req,res){
-    comment.push({
-      time: '2017-8-29',
-      name: req.query.name,
+    var comment = new Comment({
+      commentId: uuid(),
+      articalId: req.query.articalId,
+      time: new Date().getTime(),
+      author: req.query.author,
       content: req.query.content
     })
-    res.send({
-      status: "ok"
-    });
+    co(function*(){
+      yield Artical.where({articalId: req.query.articalId}).update({$inc: {comment: 1}});
+    })
+    comment.save(function(err,data){
+      if(err){
+        res.status(403).end();
+      }else{
+        res.send({Success: true})
+      }
+    })
   })
-  
 }

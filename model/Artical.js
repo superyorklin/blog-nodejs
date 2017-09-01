@@ -8,7 +8,8 @@ var ArticalSchema = new Schema({
   desc: {type: String ,default: '博主很懒，没有留下任何描述'},
   tag: Array,
   visit: {type: Number,default: 0},
-  comment: {type: Number,default: 0}
+  comment: {type: Number,default: 0},
+  content: String
 })
 
 module.exports = mongoose.model('Artical',ArticalSchema);
