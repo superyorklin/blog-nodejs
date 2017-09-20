@@ -3139,7 +3139,7 @@ samp {
 .container .side-menu .img {
   width: 150px;
   height: 150px;
-  background: url(blog/img/icon.jpg) 100% 100% no-repeat;
+  background: url(/blog/img/icon.jpg) 100% 100% no-repeat;
   background-size: cover;
   border-radius: 75px;
   margin: 0 auto;
