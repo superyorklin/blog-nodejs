@@ -10,9 +10,9 @@ var co = require('co');
 var _ = require('lodash');
 
 module.exports = function(app){
-  app.get('/',function(req,res){
+ /* app.get('/',function(req,res){
     res.render('index', { title: 'Express' });
-  });
+  });*/
 
   app.post('/login',function(req,res){
     var userName = req.query.userName;
