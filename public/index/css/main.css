@@ -3130,7 +3130,8 @@ samp {
   margin-top: 50px;
   margin-bottom: 50px;
 }
-.container .side-menu li {
+.container .side-menu li a {
+  display: block;
   height: 45px;
   color: #CDC9C9;
   line-height: 45px;
@@ -3138,20 +3139,13 @@ samp {
   text-align: center;
   border-left: 7px solid #404040;
 }
-.container .side-menu li:hover {
-  color: #FFFFFF;
-}
-.container .side-menu li.active {
+.container .side-menu li a.active {
   background: #1C86EE;
   color: #FFFFFF;
   border-left: 7px solid#416CEE;
 }
 .container .side-menu li .iconfont {
   margin-right: 10px;
-}
-.container .side-menu li a {
-  display: block;
-  height: 100%;
 }
 .container .main-content {
   margin-left: 300px;
