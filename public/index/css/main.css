@@ -3116,7 +3116,7 @@ samp {
   width: 300px;
   background: #404040;
   position: fixed;
-  height: 100vh;
+  bottom: 0;
   left: 0;
   top: 0;
 }
