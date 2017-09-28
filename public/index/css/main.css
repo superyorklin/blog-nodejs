@@ -3113,7 +3113,7 @@ samp {
   min-width: 600px;
 }
 .container .side-menu {
-  width: 300px;
+  width: 250px;
   background: #404040;
   position: fixed;
   bottom: 0;
@@ -3121,11 +3121,11 @@ samp {
   top: 0;
 }
 .container .side-menu .img {
-  width: 150px;
-  height: 150px;
+  width: 126px;
+  height: 126px;
   background: url(/index/img/icon.jpg) 100% 100% no-repeat;
   background-size: cover;
-  border-radius: 75px;
+  border-radius: 63px;
   margin: 0 auto;
   margin-top: 50px;
   margin-bottom: 50px;
@@ -3154,17 +3154,21 @@ samp {
   min-width: 500px;
 }
 @media screen and (max-width: 560px) {
+  .container {
+    width: 100vw;
+    min-width: 320px;
+  }
   .container .side-menu {
     z-index: 999;
     width: 100vw;
     height: 50px;
   }
-  .container .side-menu li {
+  .container .side-menu li a {
     width: 25%;
     float: left;
     height: 50px;
   }
-  .container .side-menu li.active {
+  .container .side-menu li a.active {
     background: #1C86EE;
     color: #FFFFFF;
     border-left: 7px solid#1C86EE;
