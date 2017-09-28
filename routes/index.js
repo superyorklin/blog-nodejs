@@ -83,6 +83,33 @@ module.exports = function(app){
     })
   });
 
+  app.post('/deleteArtical',function(req,res){
+    var articalId = req.query.articalId;
+    co(function*(){
+      try {
+        yield Artical.remove({articalId: articalId});
+        yield Comment.remove({articalId: articalId});
+        res.send({Success: true})
+      } catch (error) {
+        res.status(403);
+        res.send({err: error})
+      }
+    })
+  })
+
+  app.post('/deleteComment',function(req,res){
+    var commentId = req.query.commentId;
+    co(function*(){
+      try {
+        yield Comment.remove({commentId: commentId});
+        res.send({Success: true})
+      } catch (error) {
+        res.status(403);
+        res.send({err: error})
+      }
+    })
+  })
+
   /*
   * 获取文章信息
   *
