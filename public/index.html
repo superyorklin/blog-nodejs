@@ -13,6 +13,20 @@
 
 <body>
     <div id="react" class="react"></div>
-<script type="text/javascript" src="index/js/polyfills.bundle.js?f7a14f9e7731a44877aa"></script><script type="text/javascript" src="index/js/vendor.bundle.js?f7a14f9e7731a44877aa"></script><script type="text/javascript" src="index/js/main.bundle.js?f7a14f9e7731a44877aa"></script></body>
-
+<script type="text/javascript" src="index/js/polyfills.bundle.js?f7a14f9e7731a44877aa"></script><script type="text/javascript" src="index/js/vendor.bundle.js?f7a14f9e7731a44877aa"></script><script type="text/javascript" src="index/js/main.bundle.js?f7a14f9e7731a44877aa"></script>
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+</body>
 </html>
