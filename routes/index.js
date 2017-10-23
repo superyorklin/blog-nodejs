@@ -118,7 +118,7 @@ module.exports = function(app){
     var page = + req.query.page-1;
     co(function*(){
       var count = yield Artical.count({}).exec();
-      var articals = yield Artical.find({}).skip(page*10).limit(10);
+      var articals = yield Artical.find({}).sort({_id: -1}).skip(page*10).limit(10);
       var response = {};
       response.data = [];
       response.total = count;
