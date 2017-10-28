@@ -1,10 +1,11 @@
 var nodemailer = require('nodemailer');
 var transporter = nodemailer.createTransport({
-    host: 'smtp.yeah.net',
+    host: 'smtp.qq.com',
     port: 465,
+    secureConnection: true,
     auth: {
-        user: 'york_lin@yeah.net',
-        pass: 'lyz31415926'
+        user: '459192633@qq.com',
+        pass: 'vdgffltdlvrxbgdb'
     }
 });
 

@@ -236,12 +236,12 @@ module.exports = function(app){
       if(err){
         res.status(403).end();
       }else{
-        const response = `<p>${new Date().pattern("yyyy-MM-dd EEE hh:mm:ss")}  <b>${author}</b>  发表了评论</p><pre>${content}</pre></p>`
+        const response = `${new Date().pattern("yyyy-MM-dd EEE hh:mm:ss")},${author}发表了评论:${content}`
         let mailOptions = {
-          from: 'york_lin@yeah.net',
+          from: '459192633@qq.com',
           to: 'york_lin@yeah.net',
           subject: '博客有人评论啦',
-          html: response
+          html: `<p>${new Date().pattern("yyyy-MM-dd EEE hh:mm:ss")}${author}发表了评论:</p><pre>${content}</pre><p>详情点击<a href="http://www.yorklin.cn/#/artical/${articalId}">这里</a></p>`
         }
         transporter.sendMail(mailOptions,(err,info)=>{
           if(err){
