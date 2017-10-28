@@ -17,7 +17,7 @@ module.exports = function(app){
   });*/
   app.post('/login',function(req,res){
     var userName = req.query.userName;
-    var password = req.query.password;s
+    var password = req.query.password;
     if(userName=='admin'&&password=='admin'){
       res.cookie('lyz_blog','admin',{maxAge: 3600000});
       res.send({login: true})
