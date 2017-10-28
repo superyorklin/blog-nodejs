@@ -8,15 +8,16 @@ var Comment = require('../model/Comment');
 var Recommend = require('../model/Recommend');
 var co = require('co');
 var _ = require('lodash');
+var transporter = require('../Util/email');
+require('../Util/time-format');
 
 module.exports = function(app){
  /* app.get('/',function(req,res){
     res.render('index', { title: 'Express' });
   });*/
-
   app.post('/login',function(req,res){
     var userName = req.query.userName;
-    var password = req.query.password;
+    var password = req.query.password;s
     if(userName=='admin'&&password=='admin'){
       res.cookie('lyz_blog','admin',{maxAge: 3600000});
       res.send({login: true})
@@ -217,12 +218,16 @@ module.exports = function(app){
   })
 
   app.post('/comment',function(req,res){
+    const articalId = req.query.articalId;
+    const time = new Date().getTime();
+    const author = req.query.author;
+    const content = req.query.content;
     var comment = new Comment({
       commentId: uuid(),
-      articalId: req.query.articalId,
-      time: new Date().getTime(),
-      author: req.query.author,
-      content: req.query.content
+      articalId: articalId,
+      time: time,
+      author: author,
+      content: content
     })
     co(function*(){
       yield Artical.where({articalId: req.query.articalId}).update({$inc: {comment: 1}});
@@ -231,6 +236,18 @@ module.exports = function(app){
       if(err){
         res.status(403).end();
       }else{
+        const response = `<p>${new Date().pattern("yyyy-MM-dd EEE hh:mm:ss")}  <b>${author}</b>  发表了评论</p><pre>${content}</pre></p>`
+        let mailOptions = {
+          from: 'york_lin@yeah.net',
+          to: 'york_lin@yeah.net',
+          subject: '博客有人评论啦',
+          html: response
+        }
+        transporter.sendMail(mailOptions,(err,info)=>{
+          if(err){
+            return console.log(err)
+          }
+        })
         res.send({Success: true})
       }
     })
