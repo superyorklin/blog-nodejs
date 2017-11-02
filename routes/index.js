@@ -9,12 +9,29 @@ var Recommend = require('../model/Recommend');
 var co = require('co');
 var _ = require('lodash');
 var transporter = require('../Util/email');
+var svgCaptcha = require('svg-captcha');
 require('../Util/time-format');
 
 module.exports = function(app){
  /* app.get('/',function(req,res){
     res.render('index', { title: 'Express' });
   });*/
+  app.get('/captcha',function(req,res) {
+    let captcha = svgCaptcha.create({
+      size: 4,
+      noise: 2,
+      color: true,
+      width: 80,
+      height: 30,
+      background: '#eee',
+      fontSize: 30
+    });
+    console.log(captcha.text);
+    res.type('svg');
+    res.status(200).send(captcha.data);
+  });
+
+  
   app.post('/login',function(req,res){
     var userName = req.query.userName;
     var password = req.query.password;
