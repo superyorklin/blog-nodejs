@@ -12,6 +12,7 @@
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.0",
     "express": "~4.14.1",
+    "express-session": "^1.15.6",
     "file-stream-rotator": "^0.1.0",
     "jade": "~1.11.0",
     "lodash": "^4.17.4",

@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 var fs = require('fs');
 var routes = require('./routes/index');
 var mongoose = require('mongoose');
+var session = require('express-session');
 mongoose.Promise = global.Promise;
 
 var app = express();
@@ -42,8 +43,13 @@ app.use(logger('combined', {stream: accessLogStream})); //文件中保存日志
 app.use(logger('common')); //控制台打印日志
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(cookieParser('york'));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+  secret: 'york',
+  resave: true,
+  saveUninitialized: true
+}))
 
 routes(app);
 

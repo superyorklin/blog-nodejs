@@ -26,6 +26,7 @@ module.exports = function(app){
       background: '#eee',
       fontSize: 30
     });
+    req.session.code = captcha.text;
     console.log(captcha.text);
     res.type('svg');
     res.status(200).send(captcha.data);
@@ -235,6 +236,11 @@ module.exports = function(app){
   })
 
   app.post('/comment',function(req,res){
+    if(req.session.code.toLowerCase() !== req.query.code.toLowerCase()){
+      res.status(401)
+      res.send({errMsg: '验证码输入错误'})
+      return
+    } 
     const articalId = req.query.articalId;
     const time = new Date().getTime();
     const author = req.query.author;
