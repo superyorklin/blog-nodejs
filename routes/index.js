@@ -199,7 +199,7 @@ module.exports = function(app){
     var page = + req.query.page-1;
     co(function*(){
       var count = yield Recommend.count({}).exec();
-      var articals = yield Recommend.find({}).skip(page*10).limit(10);
+      var articals = yield Recommend.find({}).skip(page*5).limit(5);
       var response = {};
       response.data = [];
       response.total = count;
