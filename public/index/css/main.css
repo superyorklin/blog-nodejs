@@ -9459,7 +9459,7 @@ div.hr:focus { cursor: none; }
 pre { white-space: pre-wrap; }
 .CodeMirror-gutters { margin-right: 4px; }
 .md-fences, pre.md-fences { font-size: 0.9rem; display: block; page-break-inside: avoid; text-align: left; overflow: visible; white-space: pre; position: relative !important; background: inherit; }
-.md-fences .CodeMirror.CodeMirror-wrap { top: -1.6em; margin-bottom: -1.6em; }
+.md-fences .CodeMirror.CodeMirror-wrap { position: relative; top: -1.6em; margin-bottom: -1.6em; }
 .md-fences.mock-cm { white-space: pre-wrap; }
 .show-fences-line-number pre.md-fences { padding-left: 0px; }
 .show-fences-line-number pre.md-fences.mock-cm { padding-left: 40px; }
