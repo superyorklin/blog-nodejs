@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>财经助手</title>
+    <link rel="stylesheet" href="../../lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/overall.css">
+    <script src="../../lib/jquery-3.2.1.min.js"></script>
+    <script src="../../lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script src="../../js/common/Cookie.js"></script>
+    <script src="../../js/common/Request.js"></script>
+    <script src="../../js/common/Utils.js"></script>
+    <script src="js/NavigatorButtons.js"></script>
+    <script src="js/SingleStockData.js"></script>
+</head>
+<body>
+<div>
+    <div>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="../../index.html">财经助手·实时股票数据</a>
+                </div>
+
+                <div>
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                功能
+                                <b class="caret"></b>
+                            </a>
+
+                            <ul class="dropdown-menu">
+                                <li id="navigator_top_function_btn_message"><a href="#">消息</a></li>
+                                <li id="navigator_top_function_btn_stock_latest_data" class="active"><a
+                                        href="#">实时股票数据</a></li>
+                                <li id="navigator_top_function_btn_stock"><a href="#">股票</a></li>
+                                <li id="navigator_top_function_btn_fund"><a href="#">基金</a></li>
+                                <li class="divider"></li>
+                                <li id="navigator_top_function_btn_script"><a href="#">脚本</a></li>
+                            </ul>
+
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </nav>
+    </div>
+
+
+    <div class="col-lg-6 col-center-block">
+        <div id="stock_stock_data_query">
+            <div class="bs-example bs-example-form" role="form">
+                <div class="input-group">
+                    <input id="stock_stock_data_latest_query_input_stockCode" type="text" class="form-control"
+                           placeholder="输入股票代码">
+                    <span class="input-group-addon"><a id="stock_stock_data_query_input_btn_query">搜索</a></span>
+                    <span class="input-group-addon"><a id="stock_stock_data_query_input_btn_refresh">开启定时刷新</a></span>
+                </div>
+            </div>
+            <br>
+            <div id="stock_stock_data_latest_pane" class="col-lg-6 col-center-block">
+
+            </div>
+            <br>
+        </div>
+    </div>
+</div>
+</body>
+</html>

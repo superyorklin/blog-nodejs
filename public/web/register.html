@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>助手</title>
+    <link rel="stylesheet" href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/overall.css">
+    <script src="lib/jquery-3.2.1.min.js"></script>
+    <script src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script src="js/common/Cookie.js"></script>
+    <script src="js/common/Request.js"></script>
+    <script src="js/common/Utils.js"></script>
+    <script src="js/LoginRegister.js"></script>
+</head>
+<body>
+<div>
+    <div>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="index.html">助手·注册</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="col-lg-4 col-center-block">
+        <div id="register_form" class="bs-example bs-example-form" role="form">
+            <div class="input-group">
+                <span class="input-group-addon">输入名称</span>
+                <input id="register_input_name" type="text" class="form-control" placeholder="输入你的用户名..">
+            </div>
+            <br>
+            <div class="input-group">
+                <span class="input-group-addon">输入密码</span>
+                <input id="register_input_password" type="password" class="form-control"
+                       placeholder="输入你的用户密码...">
+            </div>
+            <br>
+            <div class="input-group">
+                <span class="input-group-addon">重输密码</span>
+                <input id="register_input_password_verify" type="password" class="form-control"
+                       placeholder="再输入一遍你的密码...">
+            </div>
+            <br>
+            <div class="input-group">
+                <span class="input-group-addon">邮箱地址</span>
+                <input id="register_input_email" type="email" class="form-control" placeholder="输入你的电子邮件...">
+            </div>
+            <br>
+            <div class="input-group">
+                <span class="input-group-addon">电话号码</span>
+                <input id="register_input_phone" type="text" class="form-control"
+                       placeholder="输入你的电话号码...">
+            </div>
+            <br>
+            <div class="col-lg-12">
+                <button id="register_input_btn_register" type="button" class="btn btn-default btn-block">点击注册</button>
+            </div>
+            <div class="col-lg-12">
+                <button id="register_input_btn_register_again" type="button" class="btn btn-default btn-block">重新验证
+                </button>
+            </div>
+            <div class="col-lg-12">
+                <button type="button" class="btn btn-link btn-block">
+                    <a href="login.html">返回登录</a>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

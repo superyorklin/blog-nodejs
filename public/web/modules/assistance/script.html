@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>财经助手</title>
+    <link rel="stylesheet" href="../../lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/overall.css">
+    <script src="../../lib/jquery-3.2.1.min.js"></script>
+    <script src="../../lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script src="../../lib/jquery.form.min.js"></script>
+    <script src="../../js/common/Cookie.js"></script>
+    <script src="../../js/common/Request.js"></script>
+    <script src="../../js/common/Utils.js"></script>
+    <script src="js/NavigatorButtons.js"></script>
+    <script src="js/Script.js"></script>
+</head>
+<body>
+<div>
+    <!-- 头部导航栏 -->
+    <div>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="../../index.html">财经助手·消息</a>
+                </div>
+
+                <div>
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                功能
+                                <b class="caret"></b>
+                            </a>
+
+                            <ul class="dropdown-menu">
+                                <li id="navigator_top_function_btn_message"><a href="#">消息</a></li>
+                                <li id="navigator_top_function_btn_stock_latest_data"><a href="#">实时股票数据</a></li>
+                                <li id="navigator_top_function_btn_stock"><a href="#">股票</a></li>
+                                <li id="navigator_top_function_btn_fund"><a href="#">基金</a></li>
+                                <li class="divider"></li>
+                                <li id="navigator_top_function_btn_script" class="active"><a href="#">脚本</a></li>
+                            </ul>
+
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </nav>
+    </div>
+
+    <!--分页功能导航按钮-->
+    <nav class="navbar navbar-default col-lg-6 col-center-block">
+        <div class="container-fluid">
+            <div>
+                <ul class="nav navbar-nav">
+                    <li id="nav_btn_newsMessage" class="dropdown">
+
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            脚本分类
+                            <b class="caret"></b>
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li id="script_type_nav_btn_stock_analyse"><a href="#">上传股票数据分析脚本</a></li>
+                            <li class="divider"></li>
+                            <li id="script_type_nav_btn_stock_analyse_example"><a
+                                    id="script_type_nav_btn_stock_analyse_example_link" href="#" target="_blank">下载股票数据分析脚本示例</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 面包屑提示栏 -->
+    <div class="col-lg-6 col-center-block">
+        <ol class="breadcrumb">
+            <li>脚本</li>
+            <li id="script_bread_info_type">上传股票数据分析脚本</li>
+        </ol>
+    </div>
+
+    <!-- 内容分页 -->
+    <div class="col-lg-6 col-center-block">
+        <div id="script_stock_analyse">
+            <form id="script_stock_analyse_upload_file_form" class="bs-example bs-example-form" role="form"
+                  enctype="multipart/form-data">
+                <div class="input-group">
+                    <span class="input-group-addon">选择文件:</span>
+                    <input name="file" id="script_stock_analyse_upload_file" type="file" class="form-control">
+                </div>
+                <br>
+                <div class="input-group">
+                    <span class="input-group-addon">文件命名:</span>
+                    <input name="fileName" id="script_stock_analyse_upload_fileName" type="text" class="form-control"
+                           placeholder="输入文件命名...">
+                </div>
+                <br>
+                <div class="input-group">
+                    <span class="input-group-addon">测试股票:</span>
+                    <input name="testStockCode" id="script_stock_analyse_upload_testStockCode" type="text"
+                           class="form-control"
+                           placeholder="输入测试股票代码...">
+                </div>
+                <br>
+            </form>
+
+            <div class="col-lg-12">
+                <button id="script_stock_analyse_upload_submit" type="button" class="btn btn-default btn-block">提交
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

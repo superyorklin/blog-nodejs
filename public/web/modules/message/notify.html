@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>新闻圈</title>
+    <link rel="stylesheet" href="../../lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/overall.css">
+    <script src="../../lib/jquery-3.2.1.min.js"></script>
+    <script src="../../lib/jquery.form.min.js"></script>
+    <script src="../../lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script src="../../js/common/Cookie.js"></script>
+    <script src="../../js/common/Request.js"></script>
+    <script src="../../js/common/Utils.js"></script>
+    <script src="js/NavigatorButtons.js"></script>
+    <script src="js/Notify.js"></script>
+</head>
+<body>
+<div>
+    <div>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="../../index.html">新闻圈·消息·通知</a>
+                </div>
+
+                <div>
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                功能
+                                <b class="caret"></b>
+                            </a>
+
+                            <ul class="dropdown-menu">
+                                <li id="navigator_top_function_btn_message"><a href="#">消息·列表</a></li>
+                                <li id="navigator_top_function_btn_message_search"><a href="#">消息·搜索</a></li>
+                                <li id="navigator_top_function_btn_notify" class="active"><a href="#">消息·通知</a></li>
+                                <li class="divider"></li>
+                                <li id="navigator_top_function_btn_hot_search"><a href="#">微博热搜</a></li>
+                                <li class="divider"></li>
+                                <li id="navigator_top_function_btn_script"><a href="#">脚本</a></li>
+                            </ul>
+
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </nav>
+    </div>
+
+    <!--分页功能导航按钮-->
+    <nav class="navbar navbar-default col-lg-6 col-center-block">
+        <div class="container-fluid">
+            <div>
+                <ul class="nav navbar-nav">
+                    <li id="nav_btn_notify_email" class="dropdown">
+
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            消息推送
+                            <b class="caret"></b>
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li id="notify_email_watch_email"><a href="#">查看推送任务信息</a></li>
+                            <li id="notify_email_add_email"><a href="#">添加消息推送任务</a></li>
+                        </ul>
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 面包屑提示栏 -->
+    <div class="col-lg-6 col-center-block">
+        <ol class="breadcrumb">
+            <li>消息推送</li>
+            <li id="notify_bread_info_type">我的推送任务</li>
+        </ol>
+    </div>
+
+    <!-- 内容分页 -->
+    <div class="col-lg-6 col-center-block">
+
+        <div id="notify_email_add_email_page" class="col-lg-6 col-center-block" style="display: none">
+            <div id="notify_email_add_form" class="bs-example bs-example-form" role="form">
+                <div class="input-group">
+                    <span class="input-group-addon">输入邮箱地址</span>
+                    <input id="notify_email_add_address" type="text" class="form-control" placeholder="输入你的邮箱地址..">
+                </div>
+                <br>
+                <div class="input-group">
+                    <span class="input-group-addon">选择消息类型</span>
+                    <select name="messageType" class="form-control text-align:center"
+                            id="notify_email_add_type">
+                        <option>科技</option>
+                        <option>视频</option>
+                        <option>娱乐</option>
+                        <option>军事</option>
+                        <option>社会</option>
+                        <option>健康</option>
+                        <option>国际</option>
+                        <option>电影</option>
+                        <option>图片</option>
+                        <option>财经</option>
+                        <option>股票</option>
+                        <option>基金</option>
+                        <option>时尚</option>
+                        <option>汽车</option>
+                        <option>房产</option>
+                        <option>游戏</option>
+                    </select>
+                </div>
+                <br>
+                <div class="input-group">
+                    <span class="input-group-addon">选择消息时段</span>
+                    <select name="messageRange" class="form-control text-align:center"
+                            id="notify_email_add_message_range">
+                        <option>最近一小时</option>
+                        <option>最近二小时</option>
+                        <option>最近五小时</option>
+                        <option>最近十小时</option>
+                        <option>最近十二小时</option>
+                        <option>最近一天</option>
+                    </select>
+                </div>
+                <br>
+                <div class="input-group">
+                    <span class="input-group-addon">选择推送时间段(天)</span>
+                    <select name="messageRange" class="form-control text-align:center"
+                            id="notify_email_add_notify_day">
+                        <option>每天</option>
+                        <option>周末</option>
+                        <option>工作日</option>
+                    </select>
+                </div>
+                <br>
+                <div>
+                    <span class="input-group-addon">选择推送时间段(时)</span>
+                    <select name="messageRange" class="form-control text-align:center"
+                            id="notify_email_add_notify_hour">
+                        <option>00</option>
+                        <option>01</option>
+                        <option>02</option>
+                        <option>03</option>
+                        <option>04</option>
+                        <option>05</option>
+                        <option>06</option>
+                        <option>07</option>
+                        <option>08</option>
+                        <option>09</option>
+                        <option>10</option>
+                        <option>11</option>
+                        <option>12</option>
+                        <option>13</option>
+                        <option>14</option>
+                        <option>15</option>
+                        <option>16</option>
+                        <option>17</option>
+                        <option>18</option>
+                        <option>19</option>
+                        <option>20</option>
+                        <option>21</option>
+                        <option>22</option>
+                        <option>23</option>
+                    </select>
+                </div>
+                <br>
+                <div>
+                    <span class="input-group-addon">选择推送时间段(分)</span>
+                    <select name="messageRange" class="form-control text-align:center"
+                            id="notify_email_add_notify_minute">
+                        <option>00</option>
+                        <option>01</option>
+                        <option>02</option>
+                        <option>03</option>
+                        <option>04</option>
+                        <option>05</option>
+                        <option>06</option>
+                        <option>07</option>
+                        <option>08</option>
+                        <option>09</option>
+                        <option>10</option>
+                        <option>11</option>
+                        <option>12</option>
+                        <option>13</option>
+                        <option>14</option>
+                        <option>15</option>
+                        <option>16</option>
+                        <option>17</option>
+                        <option>18</option>
+                        <option>19</option>
+                        <option>20</option>
+                        <option>21</option>
+                        <option>22</option>
+                        <option>23</option>
+                        <option>24</option>
+                        <option>25</option>
+                        <option>26</option>
+                        <option>27</option>
+                        <option>28</option>
+                        <option>29</option>
+                        <option>30</option>
+                        <option>31</option>
+                        <option>32</option>
+                        <option>33</option>
+                        <option>34</option>
+                        <option>35</option>
+                        <option>36</option>
+                        <option>37</option>
+                        <option>38</option>
+                        <option>39</option>
+                        <option>40</option>
+                        <option>41</option>
+                        <option>42</option>
+                        <option>43</option>
+                        <option>44</option>
+                        <option>45</option>
+                        <option>46</option>
+                        <option>47</option>
+                        <option>48</option>
+                        <option>49</option>
+                        <option>50</option>
+                        <option>51</option>
+                        <option>52</option>
+                        <option>53</option>
+                        <option>54</option>
+                        <option>55</option>
+                        <option>56</option>
+                        <option>57</option>
+                        <option>58</option>
+                        <option>59</option>
+                    </select>
+                </div>
+                <br>
+                <div class="col-lg-12">
+                    <button id="notify_email_add_form_submit" type="button" class="btn btn-default btn-block">提交
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="notify_email_watch_email_page">
+            <div id="notify_Email_List" class="col-lg-6 col-center-block">
+            </div>
+
+            <!-- 返回顶部锚点按钮 -->
+            <div id="top" class="circle" data-spy="affix"><a id="btn_back_top">顶部</a></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
